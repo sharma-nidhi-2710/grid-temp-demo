@@ -1,3 +1,4 @@
+import os
 import torch
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -6,14 +7,26 @@ from chronos import ChronosPipeline
 # Initialize the API
 app = FastAPI(title="Grid Temperature Forecasting API")
 
-print("Loading Chronos model... this might take a minute the first time...")
-# Load the model directly from Hugging Face Hub. 
-# It will download the weights if not cached.
-pipeline = ChronosPipeline.from_pretrained(
-    "amazon/chronos-t5-small",
-    device_map="cpu",  # Stick to CPU for the cost-effective demo
-    torch_dtype=torch.float32,
-)
+# Path to locally saved model
+LOCAL_MODEL_PATH = "./model"
+
+print("Loading Chronos model...")
+# Load from local path if available, otherwise fall back to Hugging Face Hub
+if os.path.exists(LOCAL_MODEL_PATH) and os.path.isfile(os.path.join(LOCAL_MODEL_PATH, "config.json")):
+    print(f"Loading model from local path: {LOCAL_MODEL_PATH}")
+    pipeline = ChronosPipeline.from_pretrained(
+        LOCAL_MODEL_PATH,
+        device_map="cpu",  # Stick to CPU for the cost-effective demo
+        torch_dtype=torch.float32,
+    )
+else:
+    print("Local model not found. Downloading from Hugging Face Hub...")
+    print("Run 'python save_model.py' to save the model locally for faster startup.")
+    pipeline = ChronosPipeline.from_pretrained(
+        "amazon/chronos-t5-small",
+        device_map="cpu",  # Stick to CPU for the cost-effective demo
+        torch_dtype=torch.float32,
+    )
 print("Model loaded successfully!")
 
 # Define the expected input format for the API
