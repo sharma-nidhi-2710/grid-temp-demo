@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+torch
+transformers
+accelerate
+# This line installs the Chronos library directly from Amazon's GitHub repo
+git+https://github.com/amazon-science/chronos-forecasting.git
