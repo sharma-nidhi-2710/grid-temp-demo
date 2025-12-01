@@ -8,7 +8,7 @@ from chronos import ChronosPipeline
 MODEL_NAME = "amazon/chronos-t5-small"
 LOCAL_MODEL_PATH = "./model"
 
-print(f"Downloadsing {MODEL_NAME} from Hugging Face Hub...")
+print(f"Downloading {MODEL_NAME} from Hugging Face Hub...")
 pipeline = ChronosPipeline.from_pretrained(
     MODEL_NAME,
     device_map="cpu",
