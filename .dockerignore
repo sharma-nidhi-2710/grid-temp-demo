@@ -1,0 +1,30 @@
+# Virtual environment
+grid-demo/
+venv/
+.venv/
+__pycache__/
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Scripts not needed in container
+save_model.py
+
+# Misc
+*.log
+*.tmp
+.DS_Store
+chronos_model.pt
