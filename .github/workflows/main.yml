@@ -72,6 +72,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Clean up disk space before deployment
+        run: |
+          echo "=== Disk usage before cleanup ==="
+          df -h
+          echo "=== Cleaning Docker resources ==="
+          # Stop and remove existing container if running
+          docker ps -q --filter "name=grid-demo" | xargs -r docker stop
+          docker ps -aq --filter "name=grid-demo" | xargs -r docker rm -f
+          # Clean up Docker resources
+          docker system prune -af --volumes
+          docker image prune -af
+          echo "=== Disk usage after cleanup ==="
+          df -h
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -83,18 +97,17 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
       
-      
       - name: Pull latest images
         run: |
          docker pull ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
-         
-      # - name: Stop and remove  container if running
-      #   run: |
-      #    docker ps -q --filter "name=mltest" | grep -q . && docker stop mltest && docker rm -fv mltest
        
       - name: Run Docker Image to serve users
         run: |
          docker run -d -p 8000:8000 --ipc="host" --name=grid-demo -e 'AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}' -e 'AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}' -e 'AWS_REGION=${{ secrets.AWS_REGION }}'  ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
-      - name: Clean previous images and containers
+      
+      - name: Verify deployment
         run: |
-         docker system prune -f
+          echo "=== Container status ==="
+          docker ps --filter "name=grid-demo"
+          echo "=== Final disk usage ==="
+          df -h
