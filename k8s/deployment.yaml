@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: grid-temp-forecasting
-          image: <AWS_ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/grid-temp-forecasting:latest
+          image: 720744104786.dkr.ecr.us-east-1.amazonaws.com/grid-demo:latest
           ports:
             - containerPort: 8000
           resources:
