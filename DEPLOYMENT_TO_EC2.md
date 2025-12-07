@@ -1,7 +1,6 @@
 # ☁️ Single-Instance CI/CD
 
 This document details the first phase of deployment, leveraging a self-hosted **GitHub Actions Runner** on an **AWS EC2** instance to create a continuous delivery pipeline.
-
 ---
 
 ### 1. Environment Setup
@@ -86,3 +85,4 @@ The GitHub Action automatically executed the deployment, which included pulling 
     <img width="1505" height="541" alt="image" src="https://github.com/user-attachments/assets/2d346e75-0f16-4af3-a76e-0c88f570b7a0" />
 
     * **Result:** The API returned the prediction data, confirming the application was running locally in the container and serving the model.
+### 4. Demo Video: https://drive.google.com/file/d/14fbI3dnyKqwnPB7TSH8ytR3CLo_-HhZX/view?usp=drive_link
