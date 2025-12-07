@@ -34,8 +34,8 @@ This project includes detailed documentation and video demonstrations on the two
 
 | Deployment Stage | Description | Key Focus | Video Demo |
 | :--- | :--- | :--- | :--- |
-| **[EC2 Deployment](./DEPLOYMENT_TO_EC2.md)** | Initial deployment to a single EC2 instance using a self-hosted GitHub Actions runner. | CI/CD pipeline, Docker, and S3 integration. | [Link to EC2 Video Demo] |
-| **[Kubernetes Deployment](./DEPLOYMENT_TO_KUBERNETES.md)** | Transition to a fully managed, scalable EKS cluster. | EKS cluster setup, IAM roles/Service Accounts, and observability. | [Link to K8s Video Demo] |
+| **[EC2 Deployment](./DEPLOYMENT_TO_EC2.md)** | Initial deployment to a single EC2 instance using a self-hosted GitHub Actions runner. | CI/CD pipeline, Docker, and S3 integration. | [EC2 Demo Link](https://drive.google.com/file/d/1ruQYYPQm08J_AHUMe0dDkkPGNTP3AUW3/view?usp=drive_link) |
+| **[Kubernetes Deployment](./DEPLOYMENT_TO_KUBERNETES.md)** | Transition to a fully managed, scalable EKS cluster. | EKS cluster setup, IAM roles/Service Accounts, and observability. | [K8s Demo Link](https://drive.google.com/file/d/16Hj8I6X9En8dsiEQKd3-q6yf86zLdOwu/view?usp=drive_link)  |
 
 ---
 
