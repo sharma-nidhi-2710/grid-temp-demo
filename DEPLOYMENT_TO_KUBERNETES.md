@@ -1,7 +1,6 @@
 # 🚢 Scalable EKS Cluster
 
 This document details the transition to a scalable, highly available architecture using **AWS Elastic Kubernetes Service (EKS)**.
-
 ---
 
 ### 1. EKS Cluster Configuration
@@ -78,3 +77,4 @@ The application is accessed via the provisioned **External Load Balancer** DNS.
 * **Log Content:** The application logs currently show routine **Load Balancer Health Checks** (from the ELB) logs every $\sim \mathbf{10}$ seconds, confirming the service is healthy.
 * **CloudWatch Insights:** Used for efficiently querying and analyzing log streams using a SQL-like language.
     <img width="1109" height="581" alt="image" src="https://github.com/user-attachments/assets/469364d2-b829-46d5-add2-b27bb834035c" />
+### 6. Demo Video: https://drive.google.com/file/d/1qJWjYq2tiCBv8UrjTYUt5Xy2tVj9Axh7/view?usp=sharing
