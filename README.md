@@ -1,51 +1,49 @@
-# Data Science Model Deployment Pipeline
-This is a project for time-series prediction of the temperature of a transformer.
-This project demonstrates how to select a pretrained model, run it locally, containerize it using Docker,
-and deploy it to AWS using EC2, ECR, GitHub Actions, and S3.
-## Project Overview
-- Pretrained model selection and local testing
-- Dockerized model inference application
-- CI/CD deployment pipeline with GitHub Actions
-- AWS setup using EC2, ECR, and S3
-- Automated workflow triggered on repository updates
-## 1. Select a Pretrained Model
-We selected a pretrained model (e.g., HuggingFace Transformers). Model files downloaded:
-- model.safetensors
-- config.json
-- generation_config.json
-## 2. Run the Model Locally
-```
-python app.py
-```
-## 3. Save Model Weights Locally
-Stored under `/model`.
-## 4. Dockerize the Application
-```
-docker build -t mymodel-app .
-docker run -p 8080:8080 mymodel-app
-```
-## 5. AWS Setup
-Includes ECR repo, EC2 instance, self-hosted GitHub runner.
-## 6. GitHub Actions CI/CD Pipeline
-```
-.github/workflows/deploy.yml
-```
-Automatically builds/pushes Docker image and deploys.
-## 7. Upload Model Files to S3
-Files uploaded:
-- model.safetensors
-- config.json
-- generation_config.json
-## Project Structure
-project/
-app.py
-Dockerfile
-requirements.txt
-model/
-.github/workflows/deploy.yml
-## Deployment Flow Summary
-1. Code pushed → GitHub
-2. GitHub Actions builds Docker image
-3. Image pushed to ECR
-4. EC2 pulls latest image
-5. App restarts and downloads model from S3
+# 🚀 Grid Temperature Forecasting API
+
+This repository hosts the backend service for a **Grid Temperature Forecasting API**. The service is built with **FastAPI/Uvicorn**, uses a pre-trained **ML model** provided by the AI engineering team to predict grid temperatures, and demonstrates a robust, modern deployment pipeline across different cloud platforms.
+
+### 🔑 Key Project Learnings
+
+* **Full Deployment Lifecycle:** Demonstrated end-to-end deployment, starting from local development, containerization, and deployment to EC2, culminating in a highly available, scalable **Amazon EKS (Kubernetes)** cluster.
+* **Infrastructure as Code (IaC) Principles:** Managed CI/CD pipelines using **GitHub Actions** and container orchestration.
+* **Decoupling Workload:** Implemented **AWS S3** for storing large model weights, decoupling the model from the application logic for efficient deployment and versioning.
+* **Cloud Observability:** Configured and monitored application health and performance using **AWS CloudWatch** and **Container Insights**.
+
+---
+
+### 🛠️ Technology Stack
+
+| Category | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Backend** | Python, FastAPI, Uvicorn | API development and serving the prediction model. |
+| **Model Storage** | AWS S3 | Secure, scalable storage for the large model weights (`model.safetensors`). |
+| **Containerization** | Docker, AWS ECR | Packaging the application and hosting the immutable container image. |
+| **CI/CD** | GitHub Actions | Automated build, tag, and push to ECR, and deployment to EC2. |
+| **Deployment Platforms** | AWS EC2, AWS EKS (Kubernetes) | Hosting environments for the application. |
+| **Orchestration** | Karpenter | Dynamic, cost-optimized Kubernetes node provisioning. |
+| **Networking** | AWS ELB (Load Balancer) | Providing a stable, external endpoint and high availability. |
+| **Observability** | AWS CloudWatch, Container Insights | Centralized logging, metrics, and cluster health monitoring. |
+
+---
+
+### 🗺️ Deployment Deep Dives
+
+This project includes detailed documentation and video demonstrations on the two distinct deployment stages:
+
+| Deployment Stage | Description | Key Focus | Video Demo |
+| :--- | :--- | :--- | :--- |
+| **[EC2 Deployment](./DEPLOYMENT_TO_EC2.md)** | Initial deployment to a single EC2 instance using a self-hosted GitHub Actions runner. | CI/CD pipeline, Docker, and S3 integration. | [Link to EC2 Video Demo] |
+| **[Kubernetes Deployment](./DEPLOYMENT_TO_KUBERNETES.md)** | Transition to a fully managed, scalable EKS cluster. | EKS cluster setup, IAM roles/Service Accounts, and observability. | [Link to K8s Video Demo] |
+
+---
+
+### 📞 API Endpoints
+
+The deployed application provides the following endpoints, which can be accessed via the Load Balancer DNS (for the Kubernetes deployment) or the EC2 public IP (for the EC2 deployment).
+
+| Endpoint | Method | Description | Example Request Body |
+| :--- | :--- | :--- | :--- |
+| `/health` | `GET` | Health check for the service. | N/A |
+| `/predict` | `POST` | Accepts historical temps and returns a 24-hour forecast. | `{"historical_temps": [20, 21, 22, 23, 24], "prediction_length": 24}` |
+
+**API Documentation (Swagger UI)**
