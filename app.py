@@ -3,6 +3,8 @@ import sys
 import torch
 import logging
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from chronos import ChronosPipeline
 
@@ -16,6 +18,15 @@ logger = logging.getLogger(__name__)
 
 # Initialize the API
 app = FastAPI(title="Grid Temperature Forecasting API")
+
+# Mount static files
+if os.path.isdir("static"):
+    app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
+@app.get("/")
+def web_ui():
+    return FileResponse("static/index.html")
 
 # Path to locally saved model
 LOCAL_MODEL_PATH = "./model"

@@ -23,6 +23,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the application code
 COPY app.py .
+# Copy static UI files
+COPY static/ ./static/
+# Copy the locally saved model (if present)
+COPY model/ ./model/
 
 # Expose the port the app runs on
 EXPOSE 8000

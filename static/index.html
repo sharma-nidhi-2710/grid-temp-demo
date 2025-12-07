@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Grid Temperature Forecast</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Grid Temperature Forecast</h1>
+
+      <form id="predict-form">
+        <label for="historical">Historical temperatures (comma separated)</label>
+        <textarea id="historical" rows="3" placeholder="e.g. 45,56,50,48"></textarea>
+
+        <label for="horizon">Prediction length</label>
+        <input id="horizon" type="number" value="24" min="1" max="168" />
+
+        <button type="submit">Predict</button>
+      </form>
+
+      <div id="chart-wrap">
+        <canvas id="forecastChart"></canvas>
+      </div>
+
+      
+
+      <div id="error" class="hidden"></div>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
