@@ -2,6 +2,8 @@
 
 This repository hosts the backend service for a **Grid Temperature Forecasting API**. The service is built with **FastAPI/Uvicorn**, uses a pre-trained **ML model** provided by the AI engineering team to predict grid temperatures, and demonstrates a robust, modern deployment pipeline across different cloud platforms.
 
+https://github.com/user-attachments/assets/f902c698-35ec-45e4-8637-d6a9acf8fbca
+
 ### 🔑 Key Project Learnings
 
 * **Full Deployment Lifecycle:** Demonstrated end-to-end deployment, starting from local development, containerization, and deployment to EC2, culminating in a highly available, scalable **Amazon EKS (Kubernetes)** cluster.
