@@ -9,7 +9,7 @@ The EKS cluster (`grid-demo-cluster`) was configured using the AWS Console.
 
 * **Kubernetes Version:** 1.34.
 * **IAM Roles:** Dedicated roles were created for the Cluster and Nodes.
-* [cite_start]**VPC and Subnets:** The cluster was deployed across multiple subnets [cite: 128, 139-146].
+* **VPC and Subnets:** The cluster was deployed across multiple subnets [cite: 128, 139-146].
 
 **Cluster Configuration:**
 <img width="1144" height="647" alt="image" src="https://github.com/user-attachments/assets/c7a12bea-7726-4f04-abc2-6a5b7bcacd17" />
@@ -34,13 +34,14 @@ The project utilized a mix of node management strategies, with a preference for 
 ### 3. Troubleshooting and Resolutions
 
 Two significant issues were encountered and resolved, demonstrating core Kubernetes and AWS networking troubleshooting skills:
+<img width="1280" height="631" alt="# Created Policy in IAM Roles" src="https://github.com/user-attachments/assets/ab3a8e41-913c-4073-85bd-f0f8caafadf1" />
 
 #### 3.1. ECR Pull Permissions Fix: `ImagePullBackOff`
 
 * **Root Cause:** The Node IAM role (`grid-demo-new`) was missing the required ECR read policy.
 * **Solution:** Attached the **`AmazonEC2ContainerRegistryReadOnly`** policy to the node role.
 * **Result:** Pods were able to successfully pull the image, becoming **Running and Ready (1/1)**.
-  <img width="1143" height="573" alt="image" src="https://github.com/user-attachments/assets/abc8b6de-9a0a-432c-a461-7393782cd84e" />
+  
 
 #### 3.2. Load Balancer Fix: `<pending>` Service
 
